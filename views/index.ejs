@@ -3,9 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Runners' Shop</title>
 </head>
 <body>
-    
+    <ul>
+    <% if (items.length === 0){ %>
+      <span>Sorry there is no inventory in stock. Try back later.</span>
+    <%  } else { %>
+     <% items.forEach((item, i ) => { %>
+      <li>Item:<%= item.name %> <br> Type: <%= item.type %> <br> Price: <%= item.price %> <br> Weather: <%= item.weather %> <br> Description: <%= item.description %></li>
+      <a href="/submission/<%= i %>">
+        <button id="<%= [i] %>" class = 'viewSub'>Open</button>
+      </a>  
+     <% }) %>
+     <% } %>
+    </ul>
 </body>
 </html>
