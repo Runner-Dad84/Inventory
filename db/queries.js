@@ -1,8 +1,8 @@
 const pool = require('./pool');
 
-//return all comments
+//return all items
 async function returnAllItems() {
-  const { rows } = await pool.query("SELECT * FROM inventory");
+  const { rows } = await pool.query("SELECT * FROM running_inventory");
   return rows;
 }
 
