@@ -1,5 +1,7 @@
 const express = require("express");
+const indexRouter = require("./routes/router");
 const app = express();
+const path = require("node:path");
 
 //use main js file
 app.use(express.static('public'));
