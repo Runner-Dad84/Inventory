@@ -1,21 +1,19 @@
-#! /usr/bin/env node
-
 const { Client } = require("pg");
 
 const SQL = `
-CREATE TABLE IF NOT EXISTS comments (
+CREATE TABLE IF NOT EXISTS running_inventory (
   id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
   name VARCHAR ( 255 ), 
   type VARCHAR ( 255 ), 
   price NUMERIC (10, 2),
   weather VARCHAR ( 255 ), 
-  description VARCHAR ( 255 ), 
+  description VARCHAR ( 255 )
 );
 
-INSERT INTO comments (name, type, price, weather, description) 
+INSERT INTO running_inventory (name, type, price, weather, description) 
 VALUES
-  ('Saucony Guide', 'Men's Shoe', 99.99, 'All', 'Moderate stability trainer');
-  ('Racer Half Tights', 'Men's Apparel', 59.99, 'All', 'Great for a training days');
+  ('Saucony Guide', 'Mens Shoe', '99.99', 'All', 'Moderate stability trainer'),
+  ('Racer Half Tights', 'Mens Apparel', '59.99', 'All', 'Great for a training days');
 `;
 
 async function main() {
