@@ -1,5 +1,6 @@
 const express = require("express");
 const indexRouter = require("./routes/router");
+const newRouter = require("./routes/newRouter");
 const app = express();
 const path = require("node:path");
 
@@ -8,6 +9,8 @@ app.use(express.static('public'));
 
 //routers
 app.use("/", indexRouter);
+app.use("/", newRouter);
+
 
 //set veiw engine
 app.set("view engine", "ejs");
