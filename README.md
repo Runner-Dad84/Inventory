@@ -28,6 +28,8 @@ Directory
   README.md
   /views
     index.ejs
+    /partials
+      menu.ejs
   /routes
     route.js
   /controllers
