@@ -13,7 +13,7 @@ async function postItem (name, type, price, weather, description) {
 }
 
 //Take any sized array of categories and return those categories
-async function returnMensShoe (categoryArray) {
+async function returnCategories (categoryArray) {
   const placeholders = categoryArray.map((__, i) => `$${i + 1}`.join(', '));
   const { row } = await pool.query(`SELECT * FROM running_inventory WHERE type IN ${placeholders}`, categoryArray);
 
