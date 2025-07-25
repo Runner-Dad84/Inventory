@@ -21,5 +21,6 @@ async function returnCategories (categoryArray) {
 
 module.exports = {
   returnAllItems,
-  postItem
+  postItem,
+  returnCategories
 };
