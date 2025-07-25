@@ -1,5 +1,6 @@
 const db = require("../db/queries");
 
+//return all item
 async function returnAll(req, res) {
   try {
   const items = await db.returnAllItems();
@@ -11,6 +12,7 @@ async function returnAll(req, res) {
   }
 }
 
+//post new item
 async function postInventory(req, res)
  {
   const { name, type, price, weather, description } = req.body;
@@ -24,9 +26,19 @@ async function postInventory(req, res)
      console.error(err);
     res.status(500).send("Error saving item.")
   }
-
  }
+
+ //return search results
+
+ async function returnSearch(req, res) {
+  const { category, weather } = req.query;
+  console.log(category, weather);
+  console.log('test 2');
+ }
+
+
 module.exports = {
     returnAll,
-    postInventory
+    postInventory,
+    returnSearch
 }
