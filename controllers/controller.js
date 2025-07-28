@@ -2,14 +2,23 @@ const db = require("../db/queries");
 
 //return all item
 async function returnAll(req, res) {
+  const { category, weather } = req.query;
+  console.log('req.query:', req.query);
+
   try {
-  const items = await db.returnAllItems();
-  console.log("Items: ", items);
-  res.render('index', { items });
-  } catch (error) {
-    console.error('Error', error);
-    res.status(500).send('Error. No items found.')
-  }
+    let items;
+    if (!category && !weather) {
+      items = await db.returnAllItems();
+    } else {
+       items = await db.returnCategories(category);
+    }
+    console.log("Items: ", items);
+    res.render('index', { items });
+  
+    } catch (error) {
+      console.error('Error', error);
+      res.status(500).send('Error. No items found.')
+    }
 }
 
 //post new item
@@ -28,17 +37,8 @@ async function postInventory(req, res)
   }
  }
 
- //return search results
-
- async function returnSearch(req, res) {
-  const { category, weather } = req.query;
-  console.log(category, weather);
-  console.log('test 2');
- }
-
 
 module.exports = {
     returnAll,
-    postInventory,
-    returnSearch
+    postInventory
 }
