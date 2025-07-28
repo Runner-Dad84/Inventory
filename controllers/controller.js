@@ -2,8 +2,13 @@ const db = require("../db/queries");
 
 //return all item
 async function returnAll(req, res) {
-  const { category, weather } = req.query;
+  let { category, weather } = req.query;
   console.log('req.query:', req.query);
+
+  //if single category checked change string to array
+  if (category && !Array.isArray(category)) {
+    category = [category];
+  }
 
   try {
     let items;
