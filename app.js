@@ -4,6 +4,10 @@ const newRouter = require("./routes/newRouter");
 const postRouter = require("./routes/postRouter");
 const app = express();
 const path = require("node:path");
+const assetsPath = path.join(__dirname, "public");
+
+//static path
+app.use(express.static(assetsPath));
 
 //use main js file
 app.use(express.static('public'));
