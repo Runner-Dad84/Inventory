@@ -1,30 +1,32 @@
 const db = require("../db/queries");
 
-//return all item
-async function returnAll(req, res) {
-  let { category, weather } = req.query;
-  console.log('req.query:', req.query);
 
-  //if single category checked change string to array
-  if (category && !Array.isArray(category)) {
-    category = [category];
-  }
+async function rFiltered(req, res) {
+  let { category, weather } = req.query;
+  
+  if (category && !Array.isArray(category)) {category = [ category ]};
+  if (weather && !Array.isArray(weather)) {weather = [ weather ]};
+
+  console.log('category:', category);
+  console.log('weather:', weather);
 
   try {
-    let items;
-    if (!category && !weather) {
+  let items;
+  if (!category && !weather) {
       items = await db.returnAllItems();
-    } else {
-       items = await db.returnCategories(category);
-    }
-    console.log("Items: ", items);
-    res.render('index', { items });
+  } else {
+      let filters = { category, weather };
+      items = await db.returnFilters(filters);
+  }
+
+  res.render('index', { items });
   
-    } catch (error) {
-      console.error('Error', error);
-      res.status(500).send('Error. No items found.')
+  
+} catch (error) {
+    console.error('Error', error);
+    res.status(500).send('Error. No items found.')
     }
-}
+  }
 
 //post new item
 async function postInventory(req, res)
@@ -44,6 +46,6 @@ async function postInventory(req, res)
 
 
 module.exports = {
-    returnAll,
+    rFiltered,
     postInventory
 }

@@ -12,17 +12,43 @@ async function postItem (name, type, price, weather, description) {
     await pool.query (query, [name, type, price, weather, description]);
 }
 
-//Take any sized array of categories and return those categories
+
+//Dynamic selections 
+async function returnFilters (filter) {
+  let parameters = [];
+  let values = [];
+  let counter = 1;
+  
+
+  if (filter.category && filter.category.length > 0){
+    const categoryPlaceholders = filter.category.map(() => `$${counter++}`);
+    parameters.push(`type IN (${categoryPlaceholders.join(', ')})`)
+    values.push(...filter.category)
+  }
+
+  if (filter.weather && filter.weather.length > 0){
+    const weatherPlaceholders = filter.weather.map(() => `$${counter++}`);
+    parameters.push(`weather IN (${weatherPlaceholders.join(', ')})`)
+    values.push(...filter.weather)
+  }
+  const where = parameters.length > 0 ? `WHERE ${parameters.join(' AND ')}` : '';
+  const query = `SELECT * FROM running_inventory ${where}`;
+
+  const { rows } = await pool.query(query, values);
+  return rows;
+}
+
+
+
 async function returnCategories (itemArray) {
   const placeholders = itemArray.map((__, i) => `$${i + 1}`).join(', ');
   query = `SELECT * FROM running_inventory WHERE type IN (${placeholders})`;
   const { rows } = await pool.query(query, itemArray);
   return rows;
-
 }
 
 module.exports = {
   returnAllItems,
   postItem,
-  returnCategories
+  returnFilters
 };

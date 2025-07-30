@@ -3,7 +3,7 @@ const indexRouter = express.Router();
 const commentController = require("../controllers/controller");
 
 //show all items
-indexRouter.get('/', commentController.returnAll);
+indexRouter.get('/', commentController.rFiltered);
 
 
 module.exports = indexRouter;
