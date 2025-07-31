@@ -12,7 +12,6 @@ async function postItem (name, type, price, weather, description) {
     await pool.query (query, [name, type, price, weather, description]);
 }
 
-
 //Dynamic selections 
 async function returnFilters (filter) {
   let parameters = [];
@@ -35,15 +34,6 @@ async function returnFilters (filter) {
   const query = `SELECT * FROM running_inventory ${where}`;
 
   const { rows } = await pool.query(query, values);
-  return rows;
-}
-
-
-
-async function returnCategories (itemArray) {
-  const placeholders = itemArray.map((__, i) => `$${i + 1}`).join(', ');
-  query = `SELECT * FROM running_inventory WHERE type IN (${placeholders})`;
-  const { rows } = await pool.query(query, itemArray);
   return rows;
 }
 
