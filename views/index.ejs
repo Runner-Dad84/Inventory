@@ -12,13 +12,19 @@
       <span>Sorry there is no inventory in stock. Try back later.</span>
     <%  } else { %>
      <% items.forEach((item) => { %>
-      <li>Item:<%= item.name %> <br> Type: <%= item.type %> <br> Price: <%= item.price %> <br> Weather: <%= item.weather %> <br> Description: <%= item.description %></li> 
+      <li>Item:<%= item.name %> 
+        <br> Type: <%= item.type %> 
+        <br> Price: <%= item.price %> 
+        <br> Weather: <%= item.weather %> 
+        <br> Description: <%= item.description %>
+        <br><a><button>Delete</button></a>
+    </li>
      <% }) %>
      <% } %>
     </ul>
     <a href="/new"><button>Add</button></a>
-
-<form action="/" method="GET">
+<div id="navBottom">
+   <form action="/" method="GET" id="searchForm">
         <fieldset>
             <legend>Sort by Type</legend>
             <label for="apparelM">Men's Apparel</label>
@@ -41,9 +47,9 @@
             <label for="all weather">All</label>
             <input type="checkbox" name="weather" id="all weather" value="All Weather">
          </fieldset>
-         </fieldset>
          <button type="submit" id="searchCatBtn">Search</button>
     </form>
+</div>
 
 
 
