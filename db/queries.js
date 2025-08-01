@@ -6,6 +6,12 @@ async function returnAllItems() {
   return rows;
 }
 
+//delete item
+async function deleteItem (id){
+  const { rows } = await pool.query ('DELETE FROM running_inventory WHERE id = $1', [id]);
+  return rows;
+}
+
 //add item
 async function postItem (name, type, price, weather, description) {
     query = 'INSERT INTO running_inventory (name, type, price, weather, description) VALUES ($1, $2, $3, $4, $5)';
@@ -39,6 +45,7 @@ async function returnFilters (filter) {
 
 module.exports = {
   returnAllItems,
+  deleteItem,
   postItem,
   returnFilters
 };

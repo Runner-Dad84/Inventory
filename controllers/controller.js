@@ -44,8 +44,20 @@ async function postInventory(req, res)
   }
  }
 
+ async function deleteInventoryItem(req, res) {
+  const id = req.params.id
+  
+  try {
+    await db.deleteItem(id);
+  } catch {
+    return res.status(500).send("Error deleting item.")
+  }
+  res.redirect('/');
+ }
+
 
 module.exports = {
     rFiltered,
-    postInventory
+    postInventory,
+    deleteInventoryItem
 }
