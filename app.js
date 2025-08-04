@@ -1,5 +1,6 @@
 const express = require("express");
 const indexRouter = require("./routes/router");
+const passwordRouter = require("./routes/passwordRouter");
 const newRouter = require("./routes/newRouter");
 const postRouter = require("./routes/postRouter");
 const app = express();
@@ -20,6 +21,7 @@ app.use(express.json());
 app.use("/", indexRouter);
 app.use("/", newRouter);
 app.use("/", postRouter);
+app.use("/", passwordRouter);
 
 //set veiw engine
 app.set("view engine", "ejs");
