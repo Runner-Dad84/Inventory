@@ -4,7 +4,9 @@ const deleteBtns = document.querySelectorAll('.deleteBtn');
 
 
 deleteBtns.forEach(btn => {
-    btn.addEventListener('click', (e)=>
-    console.log('delete button pressed')
+    btn.addEventListener('click', ()=> {
+        console.log('test');
+    }
+
     );
 });
