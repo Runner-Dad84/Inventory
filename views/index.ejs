@@ -17,10 +17,8 @@
         <br> Price: <%= item.price %> 
         <br> Weather: <%= item.weather %> 
         <br> Description: <%= item.description %>
-        <form action="/<%= item.id %>/delete" method="POST" style="display:inline;">
-            <a href="/password">
-                <button type="submit" class="deleteBtn" onclick="return confirm('Are you sure you want to delete this user?');">Delete</button>
-            </a>
+        <form action="/<%= item.id %>/delete" method="POST" style="display:inline;" class="delete-forms">
+                <button type="submit" class="deleteBtn" data-id="<%= item.id %>">Delete</button>
         </form>
     </li>
      <% }) %>
